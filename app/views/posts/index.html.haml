@@ -1,13 +1,16 @@
-= link_to 'New Post', new_post_path
+
 %div{class: "flex flex-col flex-start justify-center items-center text-white"}
-  %h1{class:"text-5xl font-bold mt-8 mb-4"} This is your safe space.
+  %div{class:"text-white flex flex-col justify-center items-center text-white"}
+    %h1{class:"text-5xl font-bold mt-8 mb-4"} This is your safe space.
+    %p{class:"font-thin mb-6"} Keep this as minimal as possible (less than 100 characters)
+    %div{class: "flex flex-row justify-between gap-4"}
+      = link_to 'Create a post', new_post_path, class:"cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-bold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      = link_to 'Log out', destroy_user_session_path, method: :delete, class:"cursor-pointer text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-bold rounded-lg text-xs w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
   - @posts.each do |post|
     %div{class: "flex flex-col justify-between w-1/2 my-4 pl-4 pt-4 pb-2 pr-12 border-2 rounded border-white break-words"}
       %h1{class:"text-3xl font-thin"}= post.content
       %p{class:"italic font-thin mt-6 text-right"}= "Posted by #{post.user.username} #{time_ago_in_words(post.created_at)} ago"
--# %td= link_to 'Show', post
--# %td= link_to 'Edit', edit_post_path(post)
--# %td= link_to 'Destroy', post, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
+      %div{class:"text-right mt-4"}
+        = link_to 'Edit', edit_post_path(post)
+        = link_to 'Delete', post, :method => :delete, :data => { :confirm => 'Are you sure?' }
 

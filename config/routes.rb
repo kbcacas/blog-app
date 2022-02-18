@@ -7,5 +7,11 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { session: 'users/sessions' }
   devise_scope :user do
     root to: "devise/sessions#new"
+    get "/sign_out" => "users/sessions#destroy" 
+    authenticated :user do
+      namespace :users do
+        get 'posts/index', as: :posts
+      end
+    end
   end
 end

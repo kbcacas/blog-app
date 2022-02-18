@@ -1,15 +1,19 @@
-= form_for @post do |f|
-  - if @post.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
-      %ul
-        - @post.errors.full_messages.each do |msg|
-          %li= msg
+.relative.top-32
+  %h2.text-center.text-4xl.mb-8 What do you feel right now?
+  .flex.flex-start.justify-center.items-center.text-white
+    = form_for @post do |f|
+      - if @post.errors.any?
+        #error_explanation
+          %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
+          %ul
+            - @post.errors.full_messages.each do |msg|
+              %li= msg
+      .mb-6.text-white{class:"w-96"}
+        = f.label :content, class:"block mb-2 text-sm font-medium dark:text-gray-300"
+        = f.text_field :content, class:"w-full block p-4 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        = f.hidden_field :user_id, value: current_user.id
+      .actions.flex.flex-col.justify-center.items-center
+        = f.submit 'Submit', class: "mb-4 cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        = link_to 'Back to posts', posts_path, class:"text-center"
 
 
-  .field
-    = f.label :content
-    = f.text_field :content
-    = f.hidden_field :user_id, value: current_user.id
-  .actions
-    = f.submit 'Save'
